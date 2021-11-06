@@ -1,0 +1,768 @@
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Mapview kivy.garden.mapview
+
+
+<Horarios_List_Button>:
+   selected_color: 1, 1, 1, 1
+   deselected_color: 1, 1, 1, 1
+
+<Mapview>:
+   lat: 50.6394
+   lon: 3.057
+   zoom: 11
+
+<RutaPopup>:
+   id: RutaPopup
+   background: 'atlas://data/images/defaulttheme/textinput_disabled'
+   auto_dismiss: False
+   title: root.nombre
+   title_color: [0, 0, 0, 1]
+
+   BoxLayout:
+      padding: [0,0,15,30]
+      spacing: 25
+      orientation: 'vertical'
+      canvas:
+         Color:
+            rgb: 0,0.4,0.8
+         Rectangle:
+            size: self.size
+            pos: self.pos
+
+      BoxLayout:
+         size_hint: 1, 0.1
+         spacing: 30
+         orientation: 'horizontal'
+         canvas:
+            Color:
+               rgb: 0,0.4,0.8
+            Rectangle:
+               size: self.size
+               pos: self.pos
+
+         BoxLayout:
+            size_hint: 0.05,0.6
+            pos_hint: {'center_x': 0, 'center_y':0.7}
+            canvas:
+               Color:
+                  rgb: 0.3,0.3,0.3
+               Rectangle:
+                  size: self.size
+                  pos: self.pos
+
+            Button:
+               text: "Regresar"
+               on_press: root.dismiss()
+
+
+         BoxLayout:
+            padding: [0,0,30,15]
+            size_hint: 0.1,1
+            pos_hint: {'right': 1, 'top': 1}
+            canvas:
+               Color:
+                  rgb: 1,0.3,0.3
+               Rectangle:
+                  size: self.size
+                  pos: self.pos
+
+            Label:
+               text: "Tarifa: ¢"+root.tarifa
+               bold: True
+
+      BoxLayout:
+         padding: [15,0,0,0]
+         spacing: 15
+         size_hint: 1, 0.8
+         orientation: 'horizontal'
+         canvas:
+            Color:
+               rgb: 0,0.4,0.8
+            Rectangle:
+               size: self.size
+               pos: self.pos
+
+         BoxLayout:
+            size_hint: 0.5,1
+            orientation: 'vertical'
+            canvas:
+               Color:
+                  rgb: 0,0.4,0.8
+               Rectangle:
+                  size: self.size
+                  pos: self.pos
+
+            BoxLayout:
+               padding: [0,0,0,14]
+               spacing: 14
+               pos_hint: {'right':1, 'top': 1}
+               canvas:
+                  Color:
+                     rgb: 0,0.4,0.8
+                  Rectangle:
+                     size: self.size
+                     pos: self.pos
+
+               ListView
+                  adapter:
+                     ListAdapter(data=root.output, cls=root.Horarios_List_Button)
+                  canvas.before:
+                     Color:
+                        rgb: 0,0.4,0.8
+                     Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+               ListView:
+                  adapter:
+                     ListAdapter(data=["Salidas UCR"]+root.lista_ucr, cls=root.Horarios_List_Button)
+                  canvas.before:
+                     Color:
+                        rgb: 0,0.4,0.8
+                     Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            BoxLayout:
+               padding: [0,0,0,14]
+               spacing: 14
+               pos_hint: {'right':1, 'top': 1}
+               canvas:
+                  Color:
+                     rgb: 0,0.4,0.8
+                  Rectangle:
+                     size: self.size
+                     pos: self.pos
+
+               ListView:
+                  adapter:
+                     ListAdapter(data=root.output3, cls=root.Horarios_List_Button)
+                  canvas.before:
+                     Color:
+                        rgb: 0,0.4,0.8
+                     Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+               ListView:
+                  adapter:
+                     ListAdapter(data=root.output4, cls=root.Horarios_List_Button)
+                  canvas.before:
+                     Color:
+                        rgb: 0,0.4,0.8
+                     Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+         BoxLayout:
+            size_hint: 0.4,1
+            pos_hint: {'left':1, 'top': 1}
+            canvas:
+               Color:
+                  rgb: 1,1,1
+               Rectangle:
+                  size: self.size
+                  pos: self.pos
+
+            MapView:
+               id: route_mapview
+               lat: root.lat[0]
+               lon: root.lon[0]
+               zoom: 12
+
+               #Parada 1
+               MapMarkerPopup:
+                  lat: root.lat[1]
+                  lon: root.lon[1]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[1]
+                           markup: True
+                           halign: "center"
+
+               #Parada 2
+               MapMarkerPopup:
+                  lat: root.lat[2]
+                  lon: root.lon[2]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[2]
+                           markup: True
+                           halign: "center"
+
+               #Parada 3
+               MapMarkerPopup:
+                  lat: root.lat[3]
+                  lon: root.lon[3]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[3]
+                           markup: True
+                           halign: "center"
+
+               #Parada 4
+               MapMarkerPopup:
+                  lat: root.lat[4]
+                  lon: root.lon[4]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[4]
+                           markup: True
+                           halign: "center"
+
+               #Parada 5
+               MapMarkerPopup:
+                  lat: root.lat[5]
+                  lon: root.lon[5]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[5]
+                           markup: True
+                           halign: "center"
+
+               #Parada 6
+               MapMarkerPopup:
+                  lat: root.lat[6]
+                  lon: root.lon[6]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[6]
+                           markup: True
+                           halign: "center"
+
+               #Parada 7
+               MapMarkerPopup:
+                  lat: root.lat[7]
+                  lon: root.lon[7]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[7]
+                           markup: True
+                           halign: "center"
+
+               #Parada 8
+               MapMarkerPopup:
+                  lat: root.lat[8]
+                  lon: root.lon[8]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[8]
+                           markup: True
+                           halign: "center"
+
+               #Parada 9
+               MapMarkerPopup:
+                  lat: root.lat[9]
+                  lon: root.lon[9]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[9]
+                           markup: True
+                           halign: "center"
+
+               #Parada 10
+               MapMarkerPopup:
+                  lat: root.lat[10]
+                  lon: root.lon[10]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[10]
+                           markup: True
+                           halign: "center"
+
+               #Parada 11
+               MapMarkerPopup:
+                  lat: root.lat[11]
+                  lon: root.lon[11]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[11]
+                           markup: True
+                           halign: "center"
+
+               #Parada 12
+               MapMarkerPopup:
+                  lat: root.lat[12]
+                  lon: root.lon[12]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[12]
+                           markup: True
+                           halign: "center"
+
+               #Parada 13
+               MapMarkerPopup:
+                  lat: root.lat[13]
+                  lon: root.lon[13]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[13]
+                           markup: True
+                           halign: "center"
+
+               #Parada 10
+               MapMarkerPopup:
+                  lat: root.lat[14]
+                  lon: root.lon[14]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[14]
+                           markup: True
+                           halign: "center"
+
+               #Parada 15
+               MapMarkerPopup:
+                  lat: root.lat[15]
+                  lon: root.lon[15]
+                  popup_size: dp(230), dp(130)
+
+                  Bubble:
+                     size_hint: 1,0.35
+                     BoxLayout:
+                        orientation: "horizontal"
+                        Label:
+                           text: root.stops[15]
+                           markup: True
+                           halign: "center"
+
+<U_way>:
+   spacing: 10
+   padding: 10
+   orientation: 'vertical'
+   canvas:
+      Color:
+         rgb: 0.8,0.8,0.8
+      Rectangle:
+         size: self.size
+         pos: self.pos
+
+   BoxLayout:
+      size_hint: 0.5,0.05
+      orientation: 'vertical'
+      canvas:
+         Color:
+            rgb: 0.2,0.2,0.2
+         Rectangle:
+            size: self.size
+            pos: self.pos
+      Label:
+         text: "Seleccione una ruta"
+
+   BoxLayout:
+      spacing: 2
+      size_hint: 1, 0.4
+      orientation: 'vertical'
+      canvas:
+         Color:
+            rgb: 0.8,0.8,0.8
+         Rectangle:
+            size: self.size
+            pos: self.pos
+
+      GridLayout:
+         spacing: 2
+         padding: [2,0,2,0]
+         size_hint: 1, 0.4
+         cols: 6
+         rows: 2
+         canvas:
+            Color:
+               rgb: 0.8,0.8,0.8
+            Rectangle:
+               size: self.size
+               pos: self.pos
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Acosta"
+            on_press:
+               root.open_ruta(1)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Alajuela"
+            on_press: root.open_ruta(2)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Alajuelita"
+            on_press: root.open_ruta(3)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Calle Blancos"
+            on_press: root.open_ruta(4)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Cartago"
+            on_press: root.open_ruta(5)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Coronado"
+            on_press: root.open_ruta(6)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Desamparados"
+            on_press: root.open_ruta(7)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Aserrí"
+            on_press: root.open_ruta(8)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "El Carmen\n de Guadalupe"
+            on_press: root.open_ruta(9)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Grecia"
+            on_press: root.open_ruta(10)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Heredia"
+            on_press: root.open_ruta(11)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Pavas"
+            on_press: root.open_ruta(12)
+
+      GridLayout:
+         padding: [2,0,0,0]
+         spacing: 2
+         size_hint: 1, 0.2
+         cols: 6
+         rows: 2
+         canvas:
+            Color:
+               rgb: 0.8,0.8,0.8
+            Rectangle:
+               size: self.size
+               pos: self.pos
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "San Rafael Abajo\nSan Juan de Dios\nDesamparados"
+            on_press: root.open_ruta(13)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "San Carlos"
+            on_press: root.open_ruta(14)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "San Ramón"
+            on_press: root.open_ruta(15)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Santa Ana\nEscazú"
+            on_press: root.open_ruta(16)
+
+         Button:
+            background_normal: ""
+            background_color: 0,0.4,0.8,1
+            text: "Tibás"
+            on_press: root.open_ruta(17)
+
+   BoxLayout:
+      size_hint: 0.9, 0.5
+      pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+      orientation: 'vertical'
+      canvas:
+         Color:
+            rgb: 0.8,0.8,0.8
+         Rectangle:
+            size: self.size
+            pos: self.pos
+
+      BoxLayout:
+         size_hint: 0.5,0.08
+         pos_hint: {'left': 1, 'top': 1}
+         orientation: 'vertical'
+         canvas:
+            Color:
+               rgb: 1,0.3,0.3
+            Rectangle:
+               size: self.size
+               pos: self.pos
+         Label:
+            text: "Paradas alrededor de la Universidad de Costa Rica"
+            bold: True
+
+      MapView:
+         id: main_mapview
+         lat: 9.9352758
+         lon: -84.0510866
+         zoom: 17
+
+         #Parada Edificio Saprissa
+         MapMarkerPopup:
+            lat: 9.9353784
+            lon: -84.0502700
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.7
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Acosta\nCoronado\nEl Carmen de Guadalupe\nPavas"
+                     markup: True
+                     halign: "center"
+
+         #Parada frente al parqueo del edificio de Estudios Generales
+         MapMarkerPopup:
+            lat: 9.9356121
+            lon: -84.0500522
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1.6,0.7
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Alajuela\nSan Rafael Abajo/San Juan de Dios/Desamparados\nTibás"
+                     markup: True
+                     halign: "center"
+
+         MapMarkerPopup:
+            lat: 9.9346316
+            lon: -84.0519089
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Alajuelita\nCalle Blancos"
+                     markup: True
+                     halign: "center"
+
+         #Parada Facultad de Derecho
+         MapMarkerPopup:
+            lat: 9.9364715
+            lon: -84.0543625
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Calle Blancos\nHeredia"
+                     markup: True
+                     halign: "center"
+
+         MapMarkerPopup:
+            lat: 9.9354905
+            lon: -84.0504974
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Cartago"
+                     markup: True
+                     halign: "center"
+
+         #Parada frente a la vuelta del súper Tacho
+         MapMarkerPopup:
+            lat: 9.9351962
+            lon: -84.0480230
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.5
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Coronado\nEl Carmen de Guadalupe\nTibás"
+                     markup: True
+                     halign: "center"
+
+         #Parada Facultad de Agronomía
+         MapMarkerPopup:
+            lat: 9.9386245
+            lon: -84.0486284
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.5
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Coronado\nEl Carmen de Guadalupe\nTibás"
+                     markup: True
+                     halign: "center"
+
+         #Parada Facultad de Letras
+         MapMarkerPopup:
+            lat: 9.9391803
+            lon: -84.0526726
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.7
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Coronado\nEl Carmen de Guadalupe\nHeredia\nTibás"
+                     markup: True
+                     halign: "center"
+
+         MapMarkerPopup:
+            lat: 9.9351875
+            lon: -84.0512136
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Aserrí/Desamparados\nGrecia"
+                     markup: True
+                     halign: "center"
+
+         #Parada Facultad de Educación
+         MapMarkerPopup:
+            lat: 9.9354132
+            lon: -84.0488366
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.5
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Heredia\nSan Carlos\nSan Ramón"
+                     markup: True
+                     halign: "center"
+
+         #Parada Colegio Laboratorio Emma Gamboa
+         MapMarkerPopup:
+            lat: 9.9397443
+            lon: -84.0362725
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Heredia"
+                     markup: True
+                     halign: "center"
+
+         #Parada frente al parqueo del Edificio de Arquitectura
+         MapMarkerPopup:
+            lat: 9.9342057
+            lon: -84.0521410
+            popup_size: dp(230), dp(130)
+
+            Bubble:
+               size_hint: 1,0.35
+               BoxLayout:
+                  orientation: "horizontal"
+                  Label:
+                     text: "Santa Ana/Escazú"
+                     markup: True
+                     halign: "center"
